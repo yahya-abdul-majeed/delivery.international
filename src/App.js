@@ -3,11 +3,14 @@ import Layout from "./Pages/Layout";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
 import Registration from './Pages/Registration'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
+    <>
     <BrowserRouter>
-      <Routes>
+    <Routes>
         <Route path="/" element={<Layout/>}>
           <Route path="registration" element={<Registration/>}></Route>
           <Route path="login" element={<Login/>}></Route>
@@ -15,6 +18,8 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    <ToastContainer/>
+    </>
   );
 }
 

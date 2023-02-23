@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { reset, register } from "../features/auth/authSlice";
 
 export default function Registration(){
@@ -22,10 +23,13 @@ export default function Registration(){
     
     useEffect(()=>{
         if(authState.isSuccess){
-            navigate('/')
+            toast("registration successful");
+            navigate('/login')
         }
 
-    },[authState.user, authState.isSuccess,navigate,dispatch])
+        dispatch(reset())
+
+    },[authState.isSuccess,navigate,dispatch])
 
     const handleChange = (event) =>{
        setUser((prevState)=>({

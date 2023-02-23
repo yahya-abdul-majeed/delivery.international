@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { reset, login } from "../features/auth/authSlice";
 
 
 export default function Login(){
@@ -6,6 +10,19 @@ export default function Login(){
         email: "",
         password: ""
     })
+
+    const authState = useSelector(state=>state.auth);
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(authState.isSuccess){
+            toast("login success")
+            navigate('/')
+        }
+    },[navigate,authState.isSuccess,dispatch])
+
 
     const handleChange = (event) =>{
         setUser((prevState)=>({
@@ -16,6 +33,7 @@ export default function Login(){
 
     const handleSubmit = (event) =>{
         event.preventDefault();
+        dispatch(login(user))
     }
 
     return(
