@@ -1,39 +1,78 @@
-
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { reset, register } from "../features/auth/authSlice";
 
 export default function Registration(){
+
+    const [user,setUser] = useState({
+        fullName: "",
+        password: "",
+        email: "",
+        address: "",
+        birthDate: "",
+        gender: "Male",
+        phoneNumber: ""
+    });
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const authState = useSelector((state)=> state.auth)
+    
+    useEffect(()=>{
+        if(authState.isSuccess){
+            navigate('/')
+        }
+
+    },[authState.user, authState.isSuccess,navigate,dispatch])
+
+    const handleChange = (event) =>{
+       setUser((prevState)=>({
+        ...prevState,
+        [event.target.name]: event.target.value
+       }))
+       console.log(event.target.value)
+    }
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        console.log(user);
+        dispatch(register(user));
+    }
+
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <h1>Register New Account</h1>
             <div className="form-group">
                 <label for="nameRegistration">Name</label>
-                <input type="text" className="form-control" id="nameRegistration" placeholder="Enter Name"/>
+                <input value={user.fullName} name="fullName" type="text" className="form-control" id="nameRegistration" placeholder="Enter Name" onChange={handleChange}/>
             </div>
             <div className="form-group">
                 <label for="genderRegistration">Gender</label>
-                <select id="genderRegistration" className="form-control">
+                <select value={user.gender} name="gender" id="genderRegistration" className="form-control" onChange={handleChange}>
                     <option>Male</option>
                     <option>Female</option>
                 </select>
             </div>
             <div className="form-group">
                 <label for="phonenumberRegistration">Phone Number</label>
-                <input type="tel" className="form-control" id="phonenumberRegistration" placeholder="+7 (xxx) xxx xxxx"/>
+                <input value={user.phoneNumber} name="phoneNumber" type="tel" className="form-control" id="phonenumberRegistration" placeholder="+7 (xxx) xxx xxxx" onChange={handleChange}/>
             </div>
             <div className="form-group">
                 <label for="dobRegistration">Date of Birth</label>
-                <input type="date" id="dobRegistration" className="form-control"/>
+                <input value={user.birthDate} name="birthDate" type="date" id="dobRegistration" className="form-control" onChange={handleChange}/>
             </div>
             <div className="form-group">
                 <label for="addressRegistration">Address</label>
-                <input type="text" id="addressRegistration" className="form-control" placeholder="Enter Address"/>
+                <input value={user.address} name="address" type="text" id="addressRegistration" className="form-control" placeholder="Enter Address" onChange={handleChange}/>
             </div>
             <div class="form-group">
                 <label for="emailRegistration">Email</label>
-                <input type="email" class="form-control" id="emailRegistration" aria-describedby="emailHelp" placeholder="Enter email"/>
+                <input value={user.email} name="email" type="email" class="form-control" id="emailRegistration" aria-describedby="emailHelp" placeholder="Enter email" onChange={handleChange}/>
             </div>
             <div class="form-group">
                 <label for="passwordRegistration">Password</label>
-                <input type="password" class="form-control" id="passwordRegistration" placeholder="Password"/>
+                <input value={user.password} name="password" type="password" class="form-control" id="passwordRegistration" placeholder="Password" onChange={handleChange}/>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
