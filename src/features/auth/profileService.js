@@ -11,8 +11,8 @@ const getProfile = async (token)=>{
         }
     }
     const response = await axios.get(API_URL+'profile', config)
-    console.log("this is response data")
-    console.log(response.data)
+    //console.log("this is response data")
+    //console.log(response.data)
     return response.data;
 }
 

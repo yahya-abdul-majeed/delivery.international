@@ -24,12 +24,10 @@ export default function Registration(){
     useEffect(()=>{
         if(authState.isSuccess){
             toast("registration successful");
+            dispatch(reset())
             navigate('/login')
         }
-
-        dispatch(reset())
-
-    },[authState.isSuccess,navigate,dispatch])
+    },[authState.isSuccess])
 
     const handleChange = (event) =>{
        setUser((prevState)=>({

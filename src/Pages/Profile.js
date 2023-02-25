@@ -16,12 +16,16 @@ export default function Profile(){
     const dispatch = useDispatch()
     const token = localStorage.getItem('user')
 
+
+   
+
+
+   
     useEffect(()=>{
         dispatch(getProfile(token))
-        if(profileState.user){
-            setUser(profileState.user)
-        }
-    })
+        .then(response => response.payload)
+        .then(payload => setUser(payload))
+    },[])
 
     const handleChange = (event)=>{
         setUser(prevState => ({

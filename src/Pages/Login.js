@@ -19,9 +19,10 @@ export default function Login(){
     useEffect(()=>{
         if(authState.isSuccess){
             toast("login success")
+            dispatch(reset())
             navigate('/')
         }
-    },[navigate,authState.isSuccess,dispatch])
+    },[authState.isSuccess])
 
 
     const handleChange = (event) =>{

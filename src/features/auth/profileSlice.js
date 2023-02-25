@@ -46,8 +46,8 @@ const profileSlice = createSlice({
             state.isError = false;
             state.user = action.payload;
             state.isLoading = false;
-            console.log("this is action payload")
-            console.log(action)
+            //console.log("this is action payload")
+           // console.log(action)
         })
         .addCase(getProfile.rejected,(state)=>{
             state.isSuccess =false;
