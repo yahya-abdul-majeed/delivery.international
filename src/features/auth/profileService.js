@@ -2,6 +2,8 @@ import axios from "axios";
 
 const API_URL = 'https://food-delivery.kreosoft.ru/api/account/'
 
+
+
 const getProfile = async (token)=>{
     token = token.replaceAll('"', '')
     token = 'Bearer '+token
@@ -11,15 +13,17 @@ const getProfile = async (token)=>{
         }
     }
     const response = await axios.get(API_URL+'profile', config)
-    //console.log("this is response data")
-    //console.log(response.data)
-    return response.data;
+    
+    return response.data
 }
 
 const updateProfile = async(userData, token)=>{
+    console.log(userData,"from update profile")
+    token = token.replaceAll('"', '')
+    token = 'Bearer '+token
     const config = {
         headers:{
-            'Authorization': 'Bearer '+ token
+            Authorization: token
         }
     }
     await axios.put(API_URL+'profile',userData,config)

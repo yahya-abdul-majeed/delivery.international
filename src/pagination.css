@@ -1,0 +1,36 @@
+
+.pageClassName{
+    height: 30px;
+    width:30px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.nextClassName ,.previousClassName{
+    height: 30px;
+    width:30px;
+    border: 2px solid black;
+    text-align: center;
+    background: black;
+}
+
+.nextLinkClassName{
+    text-decoration: none;
+}
+
+
+
+.activeClassName{
+    color: #fff;
+    background: #6c7ac9;
+}
+
+.containerClassName{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+.containerClassName a{
+    text-decoration: none;
+    color: white;
+}

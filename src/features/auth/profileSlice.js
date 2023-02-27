@@ -18,9 +18,9 @@ export const getProfile = createAsyncThunk('profile/getProfile' ,async(token, th
     }
 })
 
-export const updateProfile = createAsyncThunk('profile/updateProfile', async(user,token,thunkAPI)=>{
+export const updateProfile = createAsyncThunk('profile/updateProfile', async({user,token},thunkAPI)=>{
     try{
-        return await profileService.updateProfile(user,token)
+        await profileService.updateProfile(user,token)
     }catch(error){
         thunkAPI.rejectWithValue('what the fuck')
     }
@@ -54,6 +54,21 @@ const profileSlice = createSlice({
             state.isError = true;
             state.user = null;
             state.isLoading = false;
+        })
+        .addCase(updateProfile.pending,(state)=>{
+            state.isLoading = true;
+        })
+        .addCase(updateProfile.fulfilled,(state,)=>{
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isError = false;
+            console.log("update request fulfilled")
+        })
+        .addCase(updateProfile.rejected,(state)=>{
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isError = true;
+            console.log("update request rejected")
         })
     }
 })
