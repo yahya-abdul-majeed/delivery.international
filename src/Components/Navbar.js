@@ -22,8 +22,8 @@ export default function Navbar(){
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="#">Menu </a>
-                        <a class="nav-item nav-link" href="#">Orders</a>
-                        <a class="nav-item nav-link" href="#">Cart</a>                        
+                        <a class="nav-item nav-link" href="/orders">Orders</a>
+                        <a class="nav-item nav-link" href="/cart">Cart</a>                        
                     </div>
                 </div>
                 {

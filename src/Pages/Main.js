@@ -3,19 +3,49 @@ import Pagination from "../Components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { getDishes } from "../features/dish/dishSlice";
 import DishCard from "../Components/dishCard";
-
+import FilterBar from "../Components/FilterBar";
+import { useSearchParams } from 'react-router-dom'
 
 
 export default function Main(){
 
     const [dishes, setDishes] = useState([])
     const [pagination,setPagination] = useState()
+    const [filterData, setFilterData] = useState({
+        category: '',
+        isVeg: false,
+        sorting:'',
+        page: 1
+    })
+
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const handlePageChange = ( {selected}) =>{
+        setFilterData(prevState=>({
+            ...prevState,
+            page: selected + 1
+        }))
+    }
+
+    const handleFilterChange = (event)=>{
+        setFilterData(prevState => ({
+            ...prevState,
+            [event.target.name]:event.target.value
+        }))
+       
+    }
+
+    useEffect(()=>{
+        setSearchParams(filterData)
+        fetchDishes(filterData)
+        console.log('main useffect')
+    },[filterData])
 
     const dishState = useSelector(state=> state.dish)
     const dispatch = useDispatch()
 
-    const fetchDishes = () =>{
-        dispatch(getDishes())
+    const fetchDishes = (filters) =>{
+        dispatch(getDishes(filters))
         .then(response => {
             console.log("response.payload",response.payload)
             return response.payload
@@ -27,12 +57,13 @@ export default function Main(){
     }
 
     useEffect(()=>{
-        fetchDishes()
+        fetchDishes(filterData)
     },[])
 
     return(<div>
+        <FilterBar handleFilterChange={handleFilterChange} filterData={filterData}/>
        {dishes.length > 0 && (
-        <div className="container">
+        <div className="container mt-5">
             <div className="row">
             {
                 dishes.map(dish=>(
@@ -42,6 +73,7 @@ export default function Main(){
             </div>   
         </div>
        )}
+       {pagination && <Pagination count={pagination.count} handlePageChange={handlePageChange}/>}
     </div>)
    
 }

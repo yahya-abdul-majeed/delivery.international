@@ -20,7 +20,7 @@ export default function Registration(){
     const dispatch = useDispatch();
 
     const authState = useSelector((state)=> state.auth)
-    
+
     useEffect(()=>{
         if(authState.isSuccess){
             toast("registration successful");

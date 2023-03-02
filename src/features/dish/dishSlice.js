@@ -8,9 +8,9 @@ const initialState = {
     isLoading: false
 }
 
-export const getDishes = createAsyncThunk('dish/getDishes', async()=>{
+export const getDishes = createAsyncThunk('dish/getDishes', async(filterData)=>{
     try{
-        return await dishService.getDishes()
+        return await dishService.getDishes(filterData.category,filterData.isVeg, filterData.sorting, filterData.page)
     }catch(error){
 
     }
