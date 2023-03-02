@@ -15,6 +15,7 @@ const register = async (userData) =>{
 
 const logout = async ()=>{
     localStorage.removeItem('user')
+    localStorage.removeItem('userProfile')
 }
 
 const login = async(userData)=>{

@@ -1,10 +1,10 @@
 import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
 import profileService from "./profileService";
 
-
+const userProfile = JSON.parse(localStorage.getItem('userProfile'))
 
 const initialState = {
-    user: null,
+    user: userProfile? userProfile:null,
     isError:false,
     isSuccess:false,
     isLoading:false

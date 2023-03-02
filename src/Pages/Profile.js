@@ -13,31 +13,32 @@ export default function Profile(){
         phoneNumber: ""
     })
 
-    const changeBirthDate = (date) =>{
-        //console.log(date)
-        const re = /\d{4}-\d{2}-\d{2}/;
-        const arr = date.match(re)
-        console.log(arr[0], typeof arr[0])
-        return arr[0]
-    }
+    // const changeBirthDate = (date) =>{
+    //     //console.log(date)
+    //     const re = /\d{4}-\d{2}-\d{2}/;
+    //     const arr = date.match(re)
+    //     console.log(arr[0], typeof arr[0])
+    //     return arr[0]
+    // }
 
     const profileState = useSelector(state=>state.profile)
     const dispatch = useDispatch() 
 
     useEffect(()=>{
-        dispatch(getProfile(localStorage.getItem('user')))
-        .then(response => response.payload)
-        .then(payload => {
-            return {
-                fullName: payload.fullName,
-                birthDate: changeBirthDate(payload.birthDate),
-                email: payload.email,
-                gender: payload.gender,
-                address:payload.address,
-                phoneNumber:payload.phoneNumber
-            }
-        })
-        .then(obj => setUser(obj))
+        // dispatch(getProfile(localStorage.getItem('user')))
+        // .then(response => response.payload)
+        // .then(payload => {
+        //     return {
+        //         fullName: payload.fullName,
+        //         birthDate: changeBirthDate(payload.birthDate),
+        //         email: payload.email,
+        //         gender: payload.gender,
+        //         address:payload.address,
+        //         phoneNumber:payload.phoneNumber
+        //     }
+        // })
+        // .then(obj => setUser(obj))
+        setUser(profileState.user)
     },[])
 
     const handleChange = (event)=>{

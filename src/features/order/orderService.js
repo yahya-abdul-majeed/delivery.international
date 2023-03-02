@@ -25,6 +25,7 @@ const getSpecificOrder = async(token,orderId)=>{
     }
 
     const response = await axios.get(API_URL+`/${orderId}`,config)
+    return response.data
 }
 
 const createOrder = async(token,data)=>{
