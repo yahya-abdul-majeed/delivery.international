@@ -56,9 +56,10 @@ export default function Profile(){
     }
 
     return(
+        <div className="container w-75">
         <form onSubmit={handleSubmit}>
-            <h1>Profile</h1>
-            <div className="form-group row">
+            <h1 className="my-5">Profile</h1>
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="nameProfile">Name</label>
                 </div>
@@ -67,7 +68,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="form-group row">
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="emailProfile">Email</label>
                 </div>
@@ -76,7 +77,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="form-group row">
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="dobProfile">Date of Birth</label>
                 </div>
@@ -85,7 +86,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="form-group row">
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="genderProfile">Gender</label>
                 </div>
@@ -97,7 +98,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="form-group row">
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="addressProfile">Home Address</label>
                 </div>
@@ -106,7 +107,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="form-group row">
+            <div className="form-group row my-3">
                 <div className="col-2">
                     <label for="phonenumberProfile">Phone Number</label>
                 </div>
@@ -114,7 +115,8 @@ export default function Profile(){
                     <input name="phoneNumber" value={user.phoneNumber} onChange={handleChange} type="tel" id="phonenumberProfile" className="form-control" placeholder="+7 (xxx) xxx xxxx"/>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary my-3">Save changes</button>
         </form>
+        </div>
     );
 }

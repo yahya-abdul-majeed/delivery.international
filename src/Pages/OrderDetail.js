@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSpecificOrder } from "../features/order/orderSlice"
 import { useDispatch } from "react-redux"
+import '../css/orderdetail.css'
 
 
 export default function OrderDetail(){
@@ -18,27 +19,27 @@ export default function OrderDetail(){
     },[])
 
     return(
-       <div>
+       <div className="container w-50 my-5">
         {
             order && (
                 <div className="card">
                     <div className="card-header">
-                        Order#
+                        <h3><b>Order#</b></h3>
                     </div>
                     <div className="card-body">
-                        <h4>Created at: {order.orderTime}</h4>
-                        <h4>Delivery time: {order.deliveryTime}</h4>
-                        <h4>Delivery address: {order.address}</h4>
-                        <h4>Order status: {order.status}</h4>
+                        <p><b>Created at</b> : {order.orderTime}</p>
+                        <p><b>Delivery time</b> : {order.deliveryTime}</p>
+                        <p><b>Delivery address</b> : {order.address}</p>
+                        <p><b>Order status</b> : {order.status}</p>
                     </div>
                     <ul className="list-group list-group-flush">
                         {
                             order.dishes.map(dish=>(
                                 <li className="list-group-item">
-                                    <div style={{display:"flex"}}>
+                                    <div className="orderdetailitem">
                                         <img src={dish.image} style={{width:'300px'}}/>
                                         <div>
-                                            <h5>{dish.name}</h5>
+                                            <h3><b>{dish.name}</b></h3>
                                             <h5>Price/dish: {dish.price}</h5>
                                             <h5>Quantity: {dish.amount}</h5>
                                             <h5><b>Price</b>: {dish.amount * dish.price}</h5>
@@ -47,7 +48,7 @@ export default function OrderDetail(){
                                 </li>
                             ))
                         }
-                        <h2>Total price: {order.price}</h2>
+                        <h4 className="mx-3 my-2"><b>Total price:</b> {order.price}</h4>
                     </ul>
                 </div>
             )

@@ -2,7 +2,6 @@ import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../features/order/orderSlice";
 import { getDishes } from "../features/cart/cartSlice";
-import moment from "moment/moment";
 
 
 export default function Purchase(){

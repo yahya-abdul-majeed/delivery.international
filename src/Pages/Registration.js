@@ -43,8 +43,9 @@ export default function Registration(){
     }
 
     return(
+        <div className="container w-25">
         <form onSubmit={handleSubmit}>
-            <h1>Register New Account</h1>
+            <h2 className="my-3">Register New Account</h2>
             <div className="form-group">
                 <label for="nameRegistration">Name</label>
                 <input value={user.fullName} name="fullName" type="text" className="form-control" id="nameRegistration" placeholder="Enter Name" onChange={handleChange}/>
@@ -76,7 +77,8 @@ export default function Registration(){
                 <label for="passwordRegistration">Password</label>
                 <input value={user.password} name="password" type="password" class="form-control" id="passwordRegistration" placeholder="Password" onChange={handleChange}/>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary my-3">Register</button>
         </form>
+        </div>
     );
 }

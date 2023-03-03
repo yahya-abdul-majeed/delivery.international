@@ -14,15 +14,17 @@ export default function DishDetail(){
         .then(response=> setDish(response.data))
     },[])
 
-    return <div>
+    return <div className="container w-50 my-5">
         {dish && (
             <div className="container">
-                <img src={dish.image} style={{height: '500px'}}/>
-                <h5>Dish Category: {dish.category}</h5>
-                <h5>{dish.vegetarian? "Vegetarian":"Not Vegetarian"}</h5>
-                <p>{dish.description}</p>
-                <p>{dish.rating}</p>
-                <h3>{dish.price} rubles</h3>
+                <img src={dish.image} style={{height: '500px',borderRadius:"2%"}}/>
+                <div className="m-5">
+                    <h2><b>Dish Category</b> : {dish.category}</h2>
+                    <h5><b>{dish.vegetarian? "Vegetarian":"Not Vegetarian"}</b></h5>
+                    <p>{dish.description}</p>
+                    <p>{dish.rating}</p>
+                    <h5>{dish.price} rubles</h5>
+                </div>
             </div>
         )}
     </div>

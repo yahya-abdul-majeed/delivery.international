@@ -1,0 +1,30 @@
+.cartitem{
+    background-color: #FBEAEB;
+    display:flex;
+    border-radius: 30px;
+    
+}
+
+.cartitem > div:nth-child(3){
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.cartitem > div:nth-child(2){
+    margin: 20px;
+}
+
+.cartitem > img {
+    border-radius: 30px;
+}
+
+.cartbuttons{
+    display: inline-flex;
+    align-items: center;
+}
+
+.cartbuttons > h4{
+    margin-left: 10px;
+    margin-right: 10px;
+}

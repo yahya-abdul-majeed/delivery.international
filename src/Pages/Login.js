@@ -65,8 +65,9 @@ export default function Login(){
     }
 
     return(
+        <div className="container w-25">
         <form onSubmit={handleSubmit}>
-            <h1>Authorization</h1>
+            <h1 className="my-5">Authorization</h1>
             <div class="form-group">
                 <label for="emailLogin">Email</label>
                 <input value={user.email} onChange={handleChange} name="email" type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp" placeholder="Enter email"/>
@@ -75,7 +76,8 @@ export default function Login(){
                 <label for="passwordLogin">Password</label>
                 <input value={user.password} onChange={handleChange} name="password" type="password" class="form-control" id="passwordLogin" placeholder="Password"/>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" className="btn btn-primary my-3">Login</button>
         </form>
+        </div>
     );
 }

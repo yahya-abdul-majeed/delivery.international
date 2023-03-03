@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { getOrders,createOrder, confirmOrder } from "../features/order/orderSlice"
+import '../css/orderpage.css'
 
 
 export default function Order(){
@@ -19,7 +20,55 @@ export default function Order(){
 
     //event handlers
 
-    // const handleCreate = () =>{
+    const handleConfirm = (orderId) =>{
+        const obj = {
+            token: localStorage.getItem('user'),
+            orderId
+        }
+        dispatch(confirmOrder(obj))
+        .then(response=> {
+            dispatch(getOrders(localStorage.getItem('user')))
+            .then(response=> {
+                setOrders(response.payload)
+            })
+        })
+    }
+
+    return (
+        <div className="container w-75" style={{background:''}}>
+            <div className="row toprow mt-5 mb-3">
+                <div className="toprowdiv1"><h5>An order can be created with the items in the cart</h5></div>
+                <div className="toprowdiv2"><button onClick={()=>navigate('/purchase')} className="btn btn-success">Create Order</button></div>
+            </div>
+            <h2 className="mt-5 mb-3">Previous Orders</h2>
+            <div className="mb-5">
+            {
+                orders?.map(order=>(
+                    <div className="row orderitem" >
+                        <div className="col-10" onClick={()=> navigate(`/order/${order.id}`)}>
+                            <h4><b><u>Order from : {order.orderTime}</u></b></h4>
+                            <h4>Order status: {order.status}</h4>
+                            <h4>Delivery time: {order.deliveryTime}</h4>    
+                        </div>
+                        <div className="col">                
+                            {
+                                order.status === "InProcess" && (
+                                    <button onClick={()=>handleConfirm(order.id)} className="btn btn-success">Confirm delivery</button>
+                                )
+                            }
+                             <p>Total Order Cost: {order.price}</p>
+                        </div>
+                    </div>
+                ))
+            }
+            </div>
+        </div>
+    )
+}
+
+
+
+// const handleCreate = () =>{
         
     //     var date = new Date();
     //     date.setHours(date.getHours()+2)
@@ -58,44 +107,3 @@ export default function Order(){
     //         })
     //     })
     // }
-
-    const handleConfirm = (orderId) =>{
-        const obj = {
-            token: localStorage.getItem('user'),
-            orderId
-        }
-        dispatch(confirmOrder(obj))
-        .then(response=> {
-            dispatch(getOrders(localStorage.getItem('user')))
-            .then(response=> {
-                setOrders(response.payload)
-            })
-        })
-    }
-
-    return (
-        <div>
-            <div  style={{border:'3px solid black', display:"flex"}}>
-                <h5>An order can be created with the items in the cart</h5>
-                <button onClick={()=>navigate('/purchase')} className="btn btn-success">Create Order</button>
-            </div>
-            <h2>Previous Orders</h2>
-            {
-                orders?.map(order=>(
-                    <div  style={{border:'3px solid black'}}>
-                        <h4>Order from :{order.orderTime}</h4>
-                        <h4>Order status: {order.status}</h4>
-                        <h4>Delivery time: {order.deliveryTime}</h4>
-                        <h4>Total Order Cost: {order.price}</h4>
-                        {
-                            order.status === "InProcess" && (
-                                <button onClick={()=>handleConfirm(order.id)} className="btn btn-success">Confirm</button>
-                            )
-                        }
-                        <button onClick={()=> navigate(`/order/${order.id}`)} className="btn btn-primary">Details</button>
-                    </div>
-                ))
-            }
-        </div>
-    )
-}

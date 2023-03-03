@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+.orderdetailitem{
+    display:flex;
+}
+
+.orderdetailitem > div{
+    margin: 20px;
+}
+
+.orderdetailitem > div > h5:nth-child(4){
+   
+}

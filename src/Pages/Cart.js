@@ -2,6 +2,7 @@ import { isLabelWithInternallyDisabledControl } from "@testing-library/user-even
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { addDish, deleteDish, getDishes } from "../features/cart/cartSlice"
+import '../css/cartitem.css'
 
 
 export default function Cart(){
@@ -56,20 +57,20 @@ export default function Cart(){
     }
 
     return (
-        <div>
-            <h2>Your Cart</h2>
+        <div className="container w-75 my-5">
+            <h2 className="mb-5">Your Cart</h2>
             {
                 items?.map(item=>(
-                    <div style={{display:"flex"}}>
+                    <div className="cartitem mb-3">
                         <img src={item.image} style={{width:'300px'}}/>
                         <div>
-                            <h5>{item.name}</h5>
-                            <h5>Price/dish: {item.price}</h5>
-                        </div>
-                        <div>
-                            <button className="btn btn-primary" onClick={()=> handleIncrement(item.id)}>+</button>
-                            <h4>{item.amount}</h4>
-                            <button className="btn btn-primary" onClick={()=> handleDecrement(item.id)}>-</button>
+                            <h5><b>{item.name}</b></h5>
+                            <div className="cartbuttons">
+                                <button className="btn btn-primary" onClick={()=> handleIncrement(item.id)}>+</button>
+                                <h4>{item.amount}</h4>
+                                <button className="btn btn-primary" onClick={()=> handleDecrement(item.id)}>-</button>
+                            </div>
+                            <h5 className="mt-4">Price/dish: {item.price}</h5>
                         </div>
                         <div>
                             <button className="btn btn-danger" onClick={()=>handleRemove(item.id)}>Remove</button>

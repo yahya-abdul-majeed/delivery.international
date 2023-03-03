@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+.toprow{
+    height: 70px;
+    align-items: center;
+    border: 2px solid lightgrey;
+    box-shadow: 5px 5px 5px grey;
+    font-family: "MontSerrat", sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+.toprowdiv1{
+    width:550px;
+}
+
+.toprowdiv2{
+    width: 160px;
+    margin-left: auto;
+}
+
+.orderitem{
+    font-family: "MontSerrat", sans-serif;
+    border: 1px solid;
+    padding: 20px;
+    background-color: #FBEAEB;
+}
