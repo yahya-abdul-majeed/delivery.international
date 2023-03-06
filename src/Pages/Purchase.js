@@ -2,6 +2,8 @@ import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../features/order/orderSlice";
 import { getDishes } from "../features/cart/cartSlice";
+import '../css/purchase.css'
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export default function Purchase(){
@@ -11,6 +13,7 @@ export default function Purchase(){
         address: ''
     })
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const profileState = useSelector(state=>state.profile)
 
 
@@ -42,9 +45,9 @@ export default function Purchase(){
     }
 
     return(
-        <div>
-            <h1>Create Order</h1>
-            <h3>User data</h3>
+        <div className="container w-75">
+            <h1 className="my-4">Create Order</h1>
+            <h3><b>User data</b></h3>
             <form>
                 <div className="row">
                 <div className="form-group col">
@@ -57,7 +60,7 @@ export default function Purchase(){
                 </div>
                 </div>
             </form>
-            <h3>Delivery data</h3>
+            <h3 className="my-3"><b>Delivery data</b></h3>
             <form>
                 <div className="row">
                 <div className="form-group col">
@@ -71,15 +74,15 @@ export default function Purchase(){
                 </div>
             </form>
 
-            <h3>items list</h3>
+            <p className="my-3"><b>Items list</b></p>
             <ul className="list-group list-group-flush">
                 {
                     cart?.map(dish=>(
                         <li className="list-group-item">
-                            <div style={{display:"flex"}}>
+                            <div className="listitem">
                                 <img src={dish.image} style={{width:'300px'}}/>
                                 <div>
-                                    <h5>{dish.name}</h5>
+                                    <h2><b>{dish.name}</b></h2>
                                     <h5>Price/dish: {dish.price}</h5>
                                     <h5>Quantity: {dish.amount}</h5>
                                     <h5><b>Price</b>: {dish.amount * dish.price}</h5>
@@ -89,8 +92,8 @@ export default function Purchase(){
                     ))
                 }  
             </ul>
-            <h2>Total price: {cart.reduce((acc,cur)=>(acc+cur.price*cur.amount),0)}</h2>
-            <button onClick={handleCreate} className="btn btn-success">Confirm Order</button>
+            <h2 className="mt-5 mb-2 mx-5">Total price: {cart.reduce((acc,cur)=>(acc+cur.price*cur.amount),0)}</h2>
+            <button onClick={handleCreate} className="btn btn-success mx-5 mb-5">Confirm Order</button>
         </div>
     )
 }

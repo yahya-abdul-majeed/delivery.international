@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import RatingComp from "./Rating"
 import '../css/dishcard.css'
-import { addDish,getDishes } from "../features/cart/cartSlice"
+import { addDish,getDishes, deleteDish } from "../features/cart/cartSlice"
 import { useDispatch ,useSelector} from "react-redux"
 import { useEffect, useState } from "react"
 
@@ -40,6 +40,23 @@ export default function DishCard({dish}){
         .then(()=>setCount(count+1))
     }
 
+    const handleDecrement = (dishId) =>{
+        const amount = currentItem.amount
+        let isLastItem
+        if(amount <= 1){
+            isLastItem = true
+        }else{
+            isLastItem = false
+        }
+        const obj = {
+            token:localStorage.getItem('user'),
+            dishId,
+            isLastItem 
+        }
+        dispatch(deleteDish(obj))
+        .then(()=>setCount(count+1))
+    }
+
     return (
         <div className="col-lg-4 col-md-6 col-sm-12 my-4">
             <div className="card" style={{height:"100%"}} >
@@ -57,7 +74,7 @@ export default function DishCard({dish}){
                                     <div className="cartbuttons">
                                         <button className="btn btn-primary" onClick={()=> handleIncrement(dish.id)} >+</button>
                                         <h4>{itemsInCart? currentItem.amount:0}</h4>
-                                        <button className="btn btn-primary" >-</button> 
+                                        <button className="btn btn-primary" onClick={()=> handleDecrement(dish.id)} >-</button> 
                                     </div>
                                 </div>
                             ):(

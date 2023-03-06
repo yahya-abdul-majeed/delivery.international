@@ -1,0 +1,17 @@
+.listitem{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    border: 2px solid;
+    border-radius: 30px;
+    background-color: #FBEAEB;
+}
+
+.listitem > div{
+    margin: 20px;
+}
+
+.listitem > img {
+    border-radius: 30px;
+    padding: 3px;
+    align-self: center;
+}
