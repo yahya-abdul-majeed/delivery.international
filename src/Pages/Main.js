@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Pagination from "../Components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
-import { addDish } from "../features/cart/cartSlice"
 import { getDishes } from "../features/dish/dishSlice";
 import DishCard from "../Components/dishCard";
 import FilterBar from "../Components/FilterBar";
@@ -31,16 +30,27 @@ export default function Main(){
     const handleFilterChange = (event)=>{
         setFilterData(prevState => ({
             ...prevState,
-            [event.target.name]:event.target.value
+            [event.target.name]:event.target.value,
+            page: 1
         }))
-       
     }
-
     useEffect(()=>{
         setSearchParams(filterData)
         fetchDishes(filterData)
-        console.log('main useffect')
+        console.log('main useeffect')
     },[filterData])
+
+    useEffect(()=>{
+        console.log("second useeffect")
+        setFilterData({
+            category: searchParams.get("category"),
+            isVeg: searchParams.get("isVeg"),
+            sorting:searchParams.get("sorting"),
+            page: searchParams.get("page")
+        })
+    },[])
+
+    
 
     const dishState = useSelector(state=> state.dish)
     const dispatch = useDispatch()

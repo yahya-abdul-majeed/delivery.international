@@ -6,7 +6,7 @@ export default function FilterBar({handleFilterChange, filterData}){
     return (
         <div className="filterbar">
             <div>
-                <select name='category' value={filterData.category}  className="form-control" onChange={handleFilterChange}>
+                <select name='category' value={filterData.category}  className="form-select" multiple onChange={handleFilterChange}>
                     <option>--</option>
                     <option>Wok</option>
                     <option>Pizza</option>
