@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { reset, login } from "../features/auth/authSlice";
 import { getProfile } from "../features/auth/profileSlice";
+import { getDishes } from "../features/cart/cartSlice";
 
 
 export default function Login(){
@@ -45,7 +46,7 @@ export default function Login(){
     const handleSubmit = (event) =>{
         event.preventDefault();
         dispatch(login(user))
-        .then(()=>{
+        .then(()=>{// get profile
             if(localStorage.getItem('user')){
                 dispatch(getProfile(localStorage.getItem('user')))
                 .then(response => response.payload)
@@ -60,6 +61,13 @@ export default function Login(){
                     }
                 })
                 .then(obj => localStorage.setItem('userProfile',JSON.stringify(obj)))
+            }
+        })
+        .then(()=>{// get cart
+            if(localStorage.getItem('user')){
+                dispatch(getDishes(localStorage.getItem('user')))
+                .then(response => response.payload)
+                .then(obj => localStorage.setItem('cartItems', JSON.stringify(obj)))
             }
         })
     }

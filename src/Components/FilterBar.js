@@ -4,9 +4,8 @@ import '../css/filterbar.css'
 export default function FilterBar({handleFilterChange, filterData}){
     
     return (
-        <nav className="filterbar align-middle">
-            <div className="row">
-            <div className="col-4 pt-1" >
+        <div className="filterbar">
+            <div>
                 <select name='category' value={filterData.category}  className="form-control" onChange={handleFilterChange}>
                     <option>--</option>
                     <option>Wok</option>
@@ -16,14 +15,9 @@ export default function FilterBar({handleFilterChange, filterData}){
                     <option>Drink</option>
                 </select>
             </div>
-            <div className="col-4 pt-1" >
-            <select name='isVeg' value={filterData.isVeg} className="form-control" onChange={handleFilterChange}>
-                    <option value={true}>Veg</option>
-                    <option value={false}>Non-veg</option>
-                </select>
-            </div>
-            <div className="col-4 pt-1" >
-            <select name='sorting' value={filterData.sorting}  className="form-control" onChange={handleFilterChange}>
+
+            <div>
+                <select name='sorting' value={filterData.sorting}  className="form-control" onChange={handleFilterChange}>
                     <option>--</option>
                     <option>NameAsc</option>
                     <option>NameDesc</option>
@@ -33,7 +27,25 @@ export default function FilterBar({handleFilterChange, filterData}){
                     <option>RatingDesc</option>
                 </select>
             </div>
+
+            <div>
+                <select name='isVeg' value={filterData.isVeg} className="form-control" onChange={handleFilterChange}>
+                    <option value={true}>Veg</option>
+                    <option value={false}>Non-veg</option>
+                </select>
+            </div>
         </div>
-        </nav>
     )
 }
+
+
+
+// {
+
+
+
+
+
+
+
+// }

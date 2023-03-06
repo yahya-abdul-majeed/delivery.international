@@ -1,8 +1,10 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import cartService from "./cartService";
 
+const items = JSON.parse(localStorage.getItem('cartItems'))
+
 const initialState = {
-        items: [],
+        items: items? items: [],
         isError:false,
         isSuccess:false,
         isLoading:false

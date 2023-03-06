@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Pagination from "../Components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
+import { addDish } from "../features/cart/cartSlice"
 import { getDishes } from "../features/dish/dishSlice";
 import DishCard from "../Components/dishCard";
 import FilterBar from "../Components/FilterBar";
@@ -56,24 +57,29 @@ export default function Main(){
         })
     }
 
-    useEffect(()=>{
-        fetchDishes(filterData)
-    },[])
+    // useEffect(()=>{
+    //     fetchDishes(filterData)
+    // },[])
 
-    return(<div>
-        <FilterBar handleFilterChange={handleFilterChange} filterData={filterData}/>
-       {dishes.length > 0 && (
-        <div className="container mt-5">
-            <div className="row">
-            {
-                dishes.map(dish=>(
-                    <DishCard dish={dish}/>
-                ))
-            } 
-            </div>   
+    //for dishcard
+    
+
+    return(
+        <div>
+            <FilterBar handleFilterChange={handleFilterChange} filterData={filterData}/>
+            {dishes.length > 0 && (
+                <div className="container mt-5">
+                    <div className="row">
+                    {
+                        dishes.map(dish=>(
+                            <DishCard key={dish.id} dish={dish} />
+                        ))
+                    } 
+                    </div>   
+                </div>
+            )}
+            {pagination && <Pagination count={pagination.count} handlePageChange={handlePageChange}/>}
         </div>
-       )}
-       {pagination && <Pagination count={pagination.count} handlePageChange={handlePageChange}/>}
-    </div>)
+    )
    
 }

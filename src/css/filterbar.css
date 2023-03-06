@@ -1,5 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+
 .filterbar {
-   height: 3rem;
-   background: grey;
+   display: grid;
+   grid-template-columns: repeat(3,150px);
+   grid-gap: 20px;
    justify-content: center;
+   align-content: center;
+   height: 3rem;
+   background: #F96167;
+   height: 50px;
+}
+
+.filterbar > div > select{
+   font-family: "Montserrat", sans-serif;
+   font-weight: bold;
 }
