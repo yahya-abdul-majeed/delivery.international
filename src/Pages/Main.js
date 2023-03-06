@@ -34,21 +34,27 @@ export default function Main(){
             page: 1
         }))
     }
+
+    useEffect(()=>{
+        console.log("second useeffect")
+        console.log("obj",searchParams.get("category"))
+        const obj ={
+            category: searchParams.get("category") === 'null'? '': searchParams.get("category"),
+            isVeg: searchParams.get("isVeg")  === 'null'? 'false': searchParams.get("isVeg"),
+            sorting:searchParams.get("sorting")  === 'null'? '': searchParams.get("sorting"),
+            page: searchParams.get("page")  === 'null'? '1': searchParams.get("page")
+        }
+        console.log("obj",obj)
+        setFilterData(obj)
+    },[])
+
     useEffect(()=>{
         setSearchParams(filterData)
         fetchDishes(filterData)
         console.log('main useeffect')
     },[filterData])
 
-    useEffect(()=>{
-        console.log("second useeffect")
-        setFilterData({
-            category: searchParams.get("category"),
-            isVeg: searchParams.get("isVeg"),
-            sorting:searchParams.get("sorting"),
-            page: searchParams.get("page")
-        })
-    },[])
+   
 
     
 
