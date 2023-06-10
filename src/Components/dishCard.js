@@ -61,6 +61,9 @@ export default function DishCard({dish}){
         <div className="col-lg-4 col-md-6 col-sm-12 my-4">
             <div className="card" style={{height:"100%"}} >
                 <img src={dish.image} onClick={handleClick}/>
+                {
+                    dish.vegetarian && <img alt="leaf" src="leaf4.png" style={{position:"absolute",height:'50px'}}/>
+                }
                 <div className="card-body">
                     <h2 className="card-title"><b>{dish.name}</b></h2>
                     <p>Dish Category: {dish.category}</p>

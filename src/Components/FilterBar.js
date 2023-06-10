@@ -3,11 +3,34 @@ import '../css/filterbar.css'
 
 export default function FilterBar({handleFilterChange, filterData}){
     
+    const [fdata, setFdata] = useState({
+        category:filterData.category,
+        sorting: filterData.sorting,
+        isVeg : filterData.isVeg
+    })
+    console.log("filterbar")
+
+
+    const handleLocalFilterChange = (event) =>{
+        if((event.target.name == 'category' && event.target.value == 'All') || (event.target.name == 'sorting' && event.target.value == 'None')){
+            setFdata(prevState => ({
+                ...prevState,
+                [event.target.name]:null
+            }))
+        }
+        else{
+            setFdata(prevState => ({
+                ...prevState,
+                [event.target.name]:event.target.value
+            }))
+        }
+    }
+
     return (
         <div className="filterbar">
             <div>
-                <select name='category' value={filterData.category}  className="form-select" multiple onChange={handleFilterChange}>
-                    <option>--</option>
+                <select name='category' value={fdata.category} onChange={handleLocalFilterChange}  className="form-select"  >
+                    <option>All</option>
                     <option>Wok</option>
                     <option>Pizza</option>
                     <option>Soup</option>
@@ -17,8 +40,8 @@ export default function FilterBar({handleFilterChange, filterData}){
             </div>
 
             <div>
-                <select name='sorting' value={filterData.sorting}  className="form-control" onChange={handleFilterChange}>
-                    <option>--</option>
+                <select name='sorting' value={fdata.sorting} onChange={handleLocalFilterChange}  className="form-control" >
+                    <option>None</option>
                     <option>NameAsc</option>
                     <option>NameDesc</option>
                     <option>PriceAsc</option>
@@ -29,10 +52,13 @@ export default function FilterBar({handleFilterChange, filterData}){
             </div>
 
             <div>
-                <select name='isVeg' value={filterData.isVeg} className="form-control" onChange={handleFilterChange}>
+                <select name='isVeg' value={fdata.isVeg} className="form-control" onChange={handleLocalFilterChange}>
                     <option value={true}>Veg</option>
                     <option value={false}>Non-veg</option>
                 </select>
+            </div>
+            <div>
+                <button onClick={()=>handleFilterChange(fdata)} className='btn btn-success'>Filter</button>
             </div>
         </div>
     )
@@ -40,12 +66,3 @@ export default function FilterBar({handleFilterChange, filterData}){
 
 
 
-// {
-
-
-
-
-
-
-
-// }

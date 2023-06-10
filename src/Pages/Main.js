@@ -9,16 +9,18 @@ import { useSearchParams } from 'react-router-dom'
 
 export default function Main(){
 
-    const [dishes, setDishes] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [dishes, setDishes] = useState([]) 
     const [pagination,setPagination] = useState()
     const [filterData, setFilterData] = useState({
-        category: '',
-        isVeg: false,
-        sorting:'',
-        page: 1
+        category: ((searchParams.get('category') == 'null' || searchParams.get('category') == null)? '': searchParams.get('category')), 
+        isVeg: ((searchParams.get('isVeg') == 'null' || searchParams.get('isVeg') == null)? false: searchParams.get('isVeg')),
+        sorting:((searchParams.get('sorting') == 'null' || searchParams.get('sorting') == null) ? '': searchParams.get('sorting')),
+        page: ((searchParams.get('page') == 'null' || searchParams.get('page') == null) ? 1 : searchParams.get('page'))
     })
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    console.log("before useffect",filterData)
+
 
     const handlePageChange = ( {selected}) =>{
         setFilterData(prevState=>({
@@ -27,28 +29,44 @@ export default function Main(){
         }))
     }
 
-    const handleFilterChange = (event)=>{
-        setFilterData(prevState => ({
-            ...prevState,
-            [event.target.name]:event.target.value,
-            page: 1
-        }))
+    const handleFilterChange = (fdata)=>{
+        setFilterData({
+            ...fdata,
+            page: 1,
+        })
     }
     useEffect(()=>{
-        setSearchParams(filterData)
+        var obj ={}
+        if(filterData.page == 1 && (filterData.sorting !== '' || filterData.category !== '')){
+            obj.page = filterData.page
+        }
+        if(filterData.page > 1){
+            obj.page = filterData.page  
+        }
+        if(filterData.sorting !== '' && filterData.sorting !== null){
+            obj.sorting = filterData.sorting
+        }
+        if(filterData.category !== '' && filterData.category !== null){
+            obj.category = filterData.category
+        }
+        if(filterData.isVeg == true || filterData.isVeg == 'true'){
+            obj.isVeg = true
+        }
+        if((filterData.isVeg == false || filterData.isVeg == 'false') && (filterData.sorting !== '' || filterData.category !== '' || filterData.page > 1)){
+            obj.isVeg = false;
+        }
+        setSearchParams(obj)
         fetchDishes(filterData)
-        console.log('main useeffect')
     },[filterData])
 
-    useEffect(()=>{
-        console.log("second useeffect")
-        setFilterData({
-            category: searchParams.get("category"),
-            isVeg: searchParams.get("isVeg"),
-            sorting:searchParams.get("sorting"),
-            page: searchParams.get("page")
-        })
-    },[])
+    // useEffect(()=>{
+    //     setFilterData({
+    //         category: (searchParams.get('category') == 'null'? '': searchParams.get('category')), 
+    //         isVeg: (searchParams.get('isVeg') == 'null'? false: searchParams.get('isVeg')),
+    //         sorting:(searchParams.get('sorting') == 'null' ? '': searchParams.get('sorting')),
+    //         page: (searchParams.get('page') == 'null' ? 1 : searchParams.get('page'))
+    //    })
+    // },[])
 
     
 
@@ -56,6 +74,7 @@ export default function Main(){
     const dispatch = useDispatch()
 
     const fetchDishes = (filters) =>{
+        console.log(filters, "filters")
         dispatch(getDishes(filters))
         .then(response => {
             console.log("response.payload",response.payload)
@@ -67,16 +86,11 @@ export default function Main(){
         })
     }
 
-    // useEffect(()=>{
-    //     fetchDishes(filterData)
-    // },[])
-
-    //for dishcard
     
 
     return(
         <div>
-            <FilterBar handleFilterChange={handleFilterChange} filterData={filterData}/>
+            <FilterBar handleFilterChange={handleFilterChange} filterData={filterData} />
             {dishes.length > 0 && (
                 <div className="container mt-5">
                     <div className="row">
@@ -88,7 +102,7 @@ export default function Main(){
                     </div>   
                 </div>
             )}
-            {pagination && <Pagination count={pagination.count} handlePageChange={handlePageChange}/>}
+            {pagination && <Pagination key={filterData.page} selectedPage={parseInt(filterData.page,10)} count={pagination.count} handlePageChange={handlePageChange}/>}
         </div>
     )
    

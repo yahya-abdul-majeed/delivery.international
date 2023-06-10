@@ -4,7 +4,7 @@
 
 .filterbar {
    display: grid;
-   grid-template-columns: repeat(3,150px);
+   grid-template-columns: repeat(4,150px);
    grid-gap: 20px;
    justify-content: center;
    align-items: center;
